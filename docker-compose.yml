@@ -1,0 +1,40 @@
+version: "2"
+services:
+  haproxy1:
+    image: "mminks/haproxy-docker-logging"
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy/
+    ports:
+      - "3000:80"
+    networks:
+      - haproxy-example
+
+  node1:
+    image: "node"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./express:/home/node/app
+    command: "npm start"
+    networks:
+      - haproxy-example
+
+
+  node2:
+    image: "node"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./express:/home/node/app
+    command: "npm start"
+    networks:
+      - haproxy-example
+
+
+networks:
+  haproxy-example:
+
