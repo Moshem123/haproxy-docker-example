@@ -34,6 +34,19 @@ services:
     networks:
       - haproxy-example
 
+  node3:
+    image: "node"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./express:/home/node/app
+    command: "npm start"
+    networks:
+      - haproxy-example
+
+
 
 networks:
   haproxy-example:
