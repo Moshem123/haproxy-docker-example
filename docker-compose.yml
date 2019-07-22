@@ -17,6 +17,8 @@ services:
       - NODE_ENV=production
     volumes:
       - ./express:/home/node/app
+    ports:
+      - "3001:3000"
     command: "npm start"
     networks:
       - haproxy-example
@@ -30,6 +32,8 @@ services:
       - NODE_ENV=production
     volumes:
       - ./express:/home/node/app
+    ports:
+      - "3002:3000"
     command: "npm start"
     networks:
       - haproxy-example
