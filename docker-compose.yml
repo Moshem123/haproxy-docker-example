@@ -10,13 +10,12 @@ services:
       - haproxy-example
 
   node1:
-    image: "node"
+    image: naturalintmma/express:latest
     user: "node"
     working_dir: /home/node/app
     environment:
       - NODE_ENV=production
-    volumes:
-      - ./express:/home/node/app
+      - MESSAGE=node1
     ports:
       - "3001:3000"
     command: "npm start"
@@ -25,13 +24,12 @@ services:
 
 
   node2:
-    image: "node"
+    image: naturalintmma/express:latest
     user: "node"
     working_dir: /home/node/app
     environment:
       - NODE_ENV=production
-    volumes:
-      - ./express:/home/node/app
+      - MESSAGE=node2
     ports:
       - "3002:3000"
     command: "npm start"
