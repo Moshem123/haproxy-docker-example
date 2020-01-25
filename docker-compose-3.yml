@@ -3,7 +3,7 @@ services:
   haproxy1:
     image: "mminks/haproxy-docker-logging"
     volumes:
-      - ./haproxy:/usr/local/etc/haproxy/
+      - ./haproxy/haproxy-3.cfg:/usr/local/etc/haproxy/haproxy.cfg
     ports:
       - "3000:80"
     networks:
@@ -32,6 +32,16 @@ services:
     networks:
       - haproxy-example
 
+  node3:
+    image: naturalintmma/express:no-favicon
+    user: "node"
+    environment:
+      - NODE_ENV=production
+      - MESSAGE=node3
+    ports:
+      - "3003:3000"
+    networks:
+      - haproxy-example
 
 networks:
   haproxy-example:

@@ -1,0 +1,59 @@
+version: "2"
+services:
+  haproxy1:
+    image: "mminks/haproxy-docker-logging"
+    volumes:
+      - ./haproxy/haproxy-acl.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    ports:
+      - "3000:80"
+    networks:
+      - haproxy-example
+
+  moti1:
+    image: naturalintmma/express:no-favicon
+    user: "node"
+    environment:
+      - NODE_ENV=production
+      - MESSAGE=moti1
+    ports:
+      - "3001:3000"
+    networks:
+      - haproxy-example
+
+  moti2:
+    image: naturalintmma/express:no-favicon
+    user: "node"
+    environment:
+      - NODE_ENV=production
+      - MESSAGE=moti2
+    ports:
+      - "3002:3000"
+    networks:
+      - haproxy-example
+
+
+  yossi1:
+    image: naturalintmma/express:no-favicon
+    user: "node"
+    environment:
+      - NODE_ENV=production
+      - MESSAGE=yossi1
+    ports:
+      - "3003:3000"
+    networks:
+      - haproxy-example
+
+  yossi2:
+    image: naturalintmma/express:no-favicon
+    user: "node"
+    environment:
+      - NODE_ENV=production
+      - MESSAGE=yossi2
+    ports:
+      - "3004:3000"
+    networks:
+      - haproxy-example
+
+networks:
+  haproxy-example:
+
